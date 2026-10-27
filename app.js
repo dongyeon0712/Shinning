@@ -180,7 +180,7 @@ const screens = {
         <div class="tabs" role="tablist"><button role="tab" data-act="tab" data-t="h" aria-selected="${lbTab === 'h'}">Spookiest Houses</button><button role="tab" data-act="tab" data-t="g" aria-selected="${lbTab === 'g'}">Ghostbusters</button></div>
         <ul class="lb">${lbRows()}</ul>
         <div class="sp"></div>
-        <button class="btn" data-act="goto" data-to="hunt">Back to the hunt</button>
+        ${S.paired ? '<button class="btn" data-act="goto" data-to="hunt">Back to the hunt</button>' : '<button class="btn" data-act="goto" data-to="welcome">Connect your flashlight</button>'}
       </div></div>`;
   }
 };
@@ -200,7 +200,7 @@ function lbRows() {
 /* ---------- actions ---------- */
 const act = {
   goto: d => go(d.to),
-  guest: () => go('hunt'),
+  guest: () => go('leaders'),
   pair: () => { S.code = String(Math.floor(100000 + Math.random() * 900000)); go('confirm'); },
   paired: () => { S.paired = true; conn = 'connected'; save(); go('connected'); },
   reconnect: () => go('reconnecting'),
